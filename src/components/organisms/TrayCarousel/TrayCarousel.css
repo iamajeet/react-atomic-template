@@ -1,0 +1,75 @@
+.TrayCarousel {
+    position: relative;
+}
+
+.TrayCarouselFrame {
+    width: 100%;
+    overflow: hidden;
+}
+
+.TrayCarouselScrollTrack {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    overflow: -moz-scrollbars-none;
+    -webkit-box-sizing: border-box
+}
+
+.TrayCarouselScrollTrack::-webkit-scrollbar {
+    display: none;
+}
+
+.TrayCarouselSlide img {
+    width: 100%;
+}
+
+.TrayCarouselPaging {
+    position: absolute;
+    left: 50%;
+    bottom: -60px;
+    padding: 0;
+    transform: translateX(-20%);
+    font-family: Arial;
+    letter-spacing: 2px;
+    color: #888;
+}
+
+
+
+.TrayCarouselArrow {
+    display: block;
+    background: none;
+    border: none;
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    outline: none;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.TrayCarouselArrowPrev {
+    left: 15px;
+    right: auto;
+}
+
+.TrayCarouselArrowNext {
+    left: auto;
+    right: 15px;
+}
+
+.TrayCarouselArrowIcon {
+    display: inline-block;
+    padding: 10px;
+    border: solid #E5E5E5;
+    border-width: 0 5px 5px 0;
+}
+
+.TrayCarouselArrowNextIcon {
+    transform: rotate(-45deg);
+}
+
+.TrayCarouselArrowPrevIcon {
+    transform: rotate(135deg);
+}
