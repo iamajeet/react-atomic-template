@@ -18,7 +18,7 @@ class LineChart extends Component {
   }
 
   render() {
-    const { ...props } = props;
+    const { ...props } = this.props;
     return (
       <div>
         <canvas style={props.canvasStyle} ref={node => (this.node = node)} />

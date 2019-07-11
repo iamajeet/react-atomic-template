@@ -26,14 +26,14 @@ const RightContent = styled(Block)`
   position: relative;
   height: ${size("height")};
   overflow: auto;
-  padding: 5px;
+  padding: 0px 5px;
 `;
 
 const Content = styled.section`
   width: 100%;
   box-sizing: border-box;
   margin: auto;
-  padding: 1rem;
+  padding: 0rem 1rem;
   max-width: ${size("maxWidth")};
 `;
 

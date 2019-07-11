@@ -2,10 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { TrayCarousel } from "../../../components";
 import styled from "styled-components";
-const responsive = [
-  { breakPoint: 1024, cardsToShow: 2 }, // this will be applied if screen size is greater than 1280px. cardsToShow will become 4.
-  { breakPoint: 760, cardsToShow: 2 }
-];
+
 const ExampleCard = styled.h1`
   background: #00558b;
   color: #fff;
