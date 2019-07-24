@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import { palette } from "styled-theme";
 const Chart = require("chart.js");
 class LineChart extends Component {
   constructor(props) {
     super(props);
+    this.myChart = {};
   }
   componentDidMount() {
     const node = this.node;
     console.log("----------", Chart);
-    var myChart = new Chart(node, {
+    this.myChart = new Chart(node, {
       type: "line",
       data: this.props.data,
       options: this.props.options
     });
   }
+  componentWillUnmount = () => {
+    this.myChart = {};
+  };
 
   render() {
     const { ...props } = this.props;
@@ -26,5 +28,10 @@ class LineChart extends Component {
     );
   }
 }
+LineChart.propTypes = {
+  canvasStyle: PropTypes.object,
+  data: PropTypes.object,
+  options: PropTypes.object
+};
 
 export default LineChart;

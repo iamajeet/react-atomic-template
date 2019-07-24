@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { size, palette } from "styled-theme";
+import { size } from "styled-theme";
 import { Container } from "react-bootstrap";
 import { Block } from "../../../components";
 

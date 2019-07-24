@@ -1,8 +1,8 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import TableCell from ".";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import TableCell from '.';
 
-storiesOf("TableCell", module).addWithJSX("default", () => (
+storiesOf('TableCell', module).addWithJSX('default', () => (
   <table>
     <thead>
       <tr>

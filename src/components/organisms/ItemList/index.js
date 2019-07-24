@@ -1,42 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { palette } from "styled-theme";
+import { Link } from "react-router-dom";
 import { ItemBox } from "../../../components";
 import { Row, Col } from "react-bootstrap";
 
 const ItemListWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  border: 1px solid #ccc;
+  width: calc(100% - 40px);
+  height: calc(100vh - 110px);
   padding: 5px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  margin: 0 20px;
 `;
 const ItemList = props => {
-  const {
-    itemList,
-    btnTransparent,
-    btnReverse,
-    btnPalette,
-    itemClick,
-    addToCartClick
-  } = props;
+  const { itemList, itemClick } = props;
   console.log("props .............. ", props);
   return (
     <ItemListWrapper>
       <Row>
         {itemList.map((item, key) => (
-          <Col xs={12} md={4} lg={3} key={key} style={{ margin: "10px 0px" }}>
+          <Col
+            xs={6}
+            md={4}
+            lg={3}
+            key={key}
+            style={{ margin: "10px 0px 10px 0px", padding: "10px" }}
+          >
             <ItemBox
-              details={item.itemDetails}
-              rating={item.itemRating}
-              palette={btnPalette}
-              transparent={btnTransparent}
-              reverse={btnReverse}
-              addToCartClick={addToCartClick}
-              onClick={e => {
-                itemClick(item.itemDetails);
+              key={key}
+              details={item}
+              itemClick={e => {
+                itemClick(item);
               }}
             />
           </Col>
@@ -58,14 +51,13 @@ ItemList.propTypes = {
       }),
       itemDetails: PropTypes.shape({
         title: PropTypes.string,
-        price: PropTypes.string,
+        code: PropTypes.string,
         desc: PropTypes.string,
-        status: PropTypes.string,
+        status: PropTypes.number,
         quantity: PropTypes.number,
         thumbimgsrc: PropTypes.string,
         imgsrc: PropTypes.string,
-        imggallery: PropTypes.arrayOf(PropTypes.string),
-        currency: PropTypes.string
+        imggallery: PropTypes.arrayOf(PropTypes.string)
       })
     })
   ),

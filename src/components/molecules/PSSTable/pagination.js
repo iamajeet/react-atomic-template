@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 class TablePagination extends React.Component {
   constructor(props) {
     super(props);
@@ -26,7 +26,7 @@ class TablePagination extends React.Component {
     this.setPage(parseInt(e.target.value));
   }
   addPagge() {
-    if (this.state.currPage >= this.props.totalPage - 1) return;
+    if (this.state.currPage >= this.props.totalPage) return;
 
     this.setPage(this.state.currPage + 1);
   }
@@ -43,22 +43,22 @@ class TablePagination extends React.Component {
   }
   setRowsPerPage(e) {
     let i = parseInt(e.target.value);
-    if (i === "All" || isNaN(i)) i = this.props.totalsCount;
+    if (i === 'All' || isNaN(i)) i = this.props.totalsCount;
     this.props.setRowsPerPage(i);
     this.setState({
       rowPerPage: i
     });
   }
   render() {
-    let nextDisableStyle = this.state.currPage + 1 >= this.props.totalPage;
-    let prevDisableStyle = this.state.currPage + 1 <= 1;
-    let rowPerPage = this.props.totalPage === 1 ? "All" : this.props.rowPerPage;
+    let nextDisableStyle = this.state.currPage >= this.props.totalPage;
+    let prevDisableStyle = this.state.currPage <= 1;
+    let rowPerPage = this.props.totalPage === 1 ? 'All' : this.props.rowPerPage;
 
     return (
-      <div className="row" style={{ marginLeft: "0px", marginRight: "0px" }}>
+      <div className="row" style={{ marginLeft: '0px', marginRight: '0px' }}>
         <div
           className="pager col-12 col-sm-7 col-md-8 col-lg-8"
-          style={{ paddingLeft: "0px", paddingRight: "0px" }}
+          style={{ paddingLeft: '0px', paddingRight: '0px' }}
         >
           <input
             type="button"
@@ -75,7 +75,7 @@ class TablePagination extends React.Component {
           >
             {Array.from(new Array(this.props.totalPage), (x, i) => {
               return (
-                <option key={i} value={i}>
+                <option key={i + 1} value={i + 1}>
                   {i + 1}
                 </option>
               );
@@ -93,7 +93,7 @@ class TablePagination extends React.Component {
         {this.props.showPerPageOption && (
           <div
             className="right col-12 col-sm-5 col-md-4 col-lg-4"
-            style={{ paddingLeft: "0px", paddingRight: "0px" }}
+            style={{ paddingLeft: '0px', paddingRight: '0px' }}
           >
             <select
               id="rowsPerPage"
@@ -101,7 +101,7 @@ class TablePagination extends React.Component {
               value={rowPerPage}
               className="form-control page-select form--control"
             >
-              {[5, 10, 20, 50, "All"].map((item, id) => {
+              {[5, 10, 20, 50, 'All'].map((item, id) => {
                 return (
                   <option key={id} value={item}>
                     {item}

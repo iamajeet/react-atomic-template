@@ -4,7 +4,6 @@ import "./index.scss";
 class PaginationByStep extends React.Component {
   constructor(props) {
     super(props);
-    console.log("---- >>>>> ", props);
     this.state = {
       currPage: this.props.curr,
       rowPerPage: this.props.rowPerPage,
@@ -21,7 +20,6 @@ class PaginationByStep extends React.Component {
   }
   componentWillReceiveProps = nextProps => {
     //constructor is only invoked when the component is first created. if data change, need to update on componentWillReceiveProps
-    console.log("---nextprops", nextProps);
     if (nextProps.curr !== this.state.currPage) {
       this.setState({ currPage: nextProps.curr });
     }
@@ -83,7 +81,6 @@ class PaginationByStep extends React.Component {
   Click = e => {
     this.setPage(+e.currentTarget.innerHTML);
     // this.state.currPage = +e.currentTarget.innerHTML;
-    console.log("---------------", this.state);
     this.Start();
   };
 
@@ -140,20 +137,19 @@ class PaginationByStep extends React.Component {
 
   // find pagination type
   Start = () => {
-    console.log("this.props.totalPage", this.props.totalPage);
-    if (this.state.size < this.state.step * 2 + 6) {
+    if (this.state.size < this.state.step * 2) {
       this.Add(1, this.state.size + 1);
-    } else if (this.state.currPage < this.state.step * 2 + 1) {
-      this.Add(1, this.state.step * 2 + 4);
+    } else if (this.state.currPage < this.state.step * 2 - 1) {
+      this.Add(1, this.state.step * 2 + 1);
       this.Last();
     } else if (this.state.currPage > this.state.size - this.state.step * 2) {
       this.First();
-      this.Add(this.state.size - this.state.step * 2 - 2, this.state.size + 1);
+      this.Add(this.state.size - this.state.step * 2 + 1, this.state.size + 1);
     } else {
       this.First();
       this.Add(
-        this.state.currPage - this.state.step,
-        this.state.currPage + this.state.step + 1
+        this.state.currPage - this.state.step + 2,
+        this.state.currPage + this.state.step
       );
       this.Last();
     }

@@ -7,10 +7,10 @@ import { PSSTh } from "./PSSTh";
 import { PSSTd } from "./PSSTd";
 import { TablePagination } from "./pagination";
 import { PaginationByStep } from "./paginationByStep";
-import { TableCell, TableRow } from "../../../components";
-import { Caption } from "../..";
+import { TableRow } from "../../../components";
 const altBackgroundColor = ({ stripedRow, stripColor }) =>
   stripedRow ? stripColor : "none";
+
 const StyledTable = styled.table`
   font-family: ${font("primary")};
   border-collapse: collapse;
@@ -129,7 +129,7 @@ class PSSTable extends React.Component {
     let nCurr = this.state.pagers.curr;
     let pagesCount = Math.ceil(this.state.data.length / index);
     //console.log(this.state.pagers.curr, pagesCount, index);
-    if (this.state.pagers.curr >= pagesCount) nCurr = pagesCount - 1;
+    if (this.state.pagers.curr >= pagesCount) nCurr = pagesCount;
     this.setState({
       pagers: Object.assign({}, this.state.pagers, {
         rowsPerPage: index,
@@ -193,38 +193,41 @@ class PSSTable extends React.Component {
           ) : (
             ""
           )}
-          <StyledTable {...this.props}>
-            <thead>
-              <TableRow>
-                {this.props.dKey.map((item, id) => {
+          <div className="scrollable-table">
+            <StyledTable {...this.props}>
+              <thead>
+                <TableRow>
+                  {this.props.dKey.map((item, id) => {
+                    return (
+                      <PSSTh
+                        key={id}
+                        sortData={this.sortData}
+                        asc={this.state.asc[item]}
+                        dataKey={item}
+                        sortable={this.props.sortable}
+                      >
+                        {this.props.tHead[parseInt(id)]}
+                      </PSSTh>
+                    );
+                  })}
+                </TableRow>
+              </thead>
+              <tbody>
+                {pageData.map((item, id) => {
                   return (
-                    <PSSTh
-                      key={id}
-                      sortData={this.sortData}
-                      asc={this.state.asc[item]}
-                      dataKey={item}
-                      sortable={this.props.sortable}
-                    >
-                      {this.props.tHead[parseInt(id)]}
-                    </PSSTh>
+                    <TableRow key={id} colorPalette="white">
+                      <PSSTd
+                        tdData={item}
+                        {...this.props}
+                        dKey={this.props.dKey}
+                        customTd={this.props.customTd}
+                      />
+                    </TableRow>
                   );
                 })}
-              </TableRow>
-            </thead>
-            <tbody>
-              {pageData.map((item, id) => {
-                return (
-                  <PSSTd
-                    key={id}
-                    tdData={item}
-                    {...this.props}
-                    dKey={this.props.dKey}
-                    customTd={this.props.customTd}
-                  />
-                );
-              })}
-            </tbody>
-          </StyledTable>
+              </tbody>
+            </StyledTable>
+          </div>
         </div>
       </div>
     );

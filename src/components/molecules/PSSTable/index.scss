@@ -1,6 +1,12 @@
 // $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 .sortable-table {
+    .scrollable-table {
+        overflow: auto;
+    }
+
+    overflow: hidden;
+
     .form--control {
         height: 30px;
         padding: 0px 10px;

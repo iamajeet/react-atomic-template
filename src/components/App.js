@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-
 import { HomePage, SamplePage, NotFoundPage } from "../components";
-import theme from "./themes/default";
-
+import maintheme from "./themes/maintheme";
+import { ThemeProvider } from "styled-components";
 class App extends Component {
   render() {
+    console.log("theme------", maintheme);
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={maintheme}>
         <Switch>
           <Route path="/" component={HomePage} exact />
           <Route path="/home" component={HomePage} exact />

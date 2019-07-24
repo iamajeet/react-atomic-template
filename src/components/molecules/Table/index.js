@@ -4,17 +4,13 @@ import styled from "styled-components";
 import { font, palette } from "styled-theme";
 
 import { Caption } from "../../../components";
-const altBackgroundColor = ({ stripedRow, stripColor }) =>
-  stripedRow ? stripColor : "none";
+
 const StyledTable = styled.table`
   font-family: ${font("primary")};
   border-collapse: collapse;
   width: 100%;
   border: 1px solid ${palette("grayscale", 1, true)};
   color: ${palette("grayscale", 0)};
-  tr:nth-child(even) {
-    background-color: ${altBackgroundColor};
-  }
 `;
 
 const Table = ({ caption, head, foot, children, ...props }) => {
@@ -34,9 +30,7 @@ Table.propTypes = {
   head: PropTypes.node,
   foot: PropTypes.node,
   children: PropTypes.any,
-  reverse: PropTypes.bool,
-  stripedRow: PropTypes.bool,
-  stripColor: PropTypes.string
+  reverse: PropTypes.bool
 };
 
 export default Table;

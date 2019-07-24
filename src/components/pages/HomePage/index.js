@@ -6,7 +6,6 @@ import {
   PageTemplate,
   Header,
   Footer,
-  CardBox,
   LeftNavigation,
   InfoWidget,
   LineChart,

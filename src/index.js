@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { basename } from "./config";
 import "./index.scss";
-import App from "./components/App";
+import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 const renderApp = () => (
   <BrowserRouter basename={basename}>

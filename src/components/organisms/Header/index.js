@@ -3,26 +3,7 @@ import styled from "styled-components";
 import { palette } from "styled-theme";
 import { Navbar, Media } from "react-bootstrap";
 import { ToggleButton, Avatar, Block } from "../../../components";
-const LINKS = [
-  {
-    name: "HomePage",
-    link: "/",
-    icon: "fa fa-tachometer",
-    title: "Home Page",
-    style: {
-      marginLeft: "5px"
-    }
-  },
-  {
-    name: "SamplePage",
-    link: "/sample-page",
-    icon: "fa fa-video-camera",
-    title: "Sample Page",
-    style: {
-      marginLeft: "5px"
-    }
-  }
-];
+
 const NavBarWrapper = styled(Navbar)`
   &.bg-dark {
     background-color: ${palette("grayscale", 8)} !important;
@@ -56,7 +37,7 @@ class Header extends Component {
               src={
                 props.logoImage && props.logoImage.src
                   ? props.logoImage.src
-                  : "assets/images/brand-logo.png"
+                  : "/assets/images/brand-logo.png"
               }
               alt={
                 props.logoImage && props.logoImage.alt
@@ -96,7 +77,7 @@ class Header extends Component {
           </Form>
         </Navbar.Collapse> */}
         <TopNavigation />
-        <Avatar navOptions={LINKS} />
+        <Avatar navOptions={props.avatarLinks} />
       </NavBarWrapper>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { PSSTable } from "../../../components";
+import { PSSTable, ViewButton } from "../../../components";
 import { PaginationByStep } from "./paginationByStep";
 let MyData = [
   {
@@ -1523,7 +1523,8 @@ let col = [
   "remote",
   "backup",
   "HDD",
-  "videoout"
+  "videoout",
+  "view"
 ];
 let tHead = [
   "Image",
@@ -1534,7 +1535,8 @@ let tHead = [
   "Remote",
   "Backup",
   "HDD",
-  "Video_output"
+  "Video_output",
+  "View"
 ];
 const currentPage = e => {
   console.log("currentPage------ ", e);
@@ -1591,6 +1593,7 @@ storiesOf("PSSTable", module)
       sortable={true}
       paginationByStep={true}
       step={3}
+      customTd={[{ custd: ViewButton, keyItem: "view" }]}
     />
   ))
   .addWithJSX("pagination btn", () => (

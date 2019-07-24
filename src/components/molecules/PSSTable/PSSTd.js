@@ -4,7 +4,7 @@ import { TableCell, TableRow } from "../../../components";
 const PSSTd = props => {
   let CustomTd = props.customTd;
   return (
-    <TableRow>
+    <>
       {props.dKey.map((item, id) => {
         let CustomTdComponent = null;
         CustomTdComponent =
@@ -32,7 +32,7 @@ const PSSTd = props => {
 
         return <TableCell key={id}>{props.tdData[item]}</TableCell>;
       })}
-    </TableRow>
+    </>
   );
 };
 PSSTd.propTypes = {

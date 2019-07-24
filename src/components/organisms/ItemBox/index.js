@@ -1,66 +1,94 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { palette } from "styled-theme";
-import { Button, StarRating } from "../../../components";
+import { palette, size } from "styled-theme";
+import { StarRating } from "../../../components";
 
 const ItemWrapper = styled.div`
   width: 100%;
   height: auto;
-  border: 1px solid #ccc;
+  background: ${palette("white", 0)};
   padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 ${palette("grayscale", 9)},
+    0 6px 20px 0 ${palette("grayscale", 9)};
 `;
 
-const bgImage = ({ details }) => `url(${details.imgsrc})`;
+const bgImage = ({ details }) => `url("${details.imageSrc}")`;
+
 const ImageWrapper = styled.div`
-  width: auto;
+  width: 100%;
   height: 200px;
-  border: 1px solid #ccc;
-  margin: 2px;
   text-align: center;
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: left center;
   background-image: ${bgImage};
+  border: 1px solid ${palette("grayscale", 5)};
+  border-radius: 5px;
+  @media screen and (max-width: 1024px) {
+    height: 120px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 150px;
+  }
 `;
+
 const TitleWrapper = styled.div`
   width: auto;
-  border: 1px solid #ccc;
-  margin: 2px;
-  padding: 5px;
+  height: 45px;
+  overflow: hidden;
+  margin: 2px 0;
+  padding: 0px 5px;
+  font-size: ${size("s14px")};
+  font-weight: bold;
   text-align: left;
-  color: #ccc;
+  border: 1px solid ${palette("grayscale", 5)};
+
+  border-radius: 5px;
+  color: ${palette("grayscale", 0)};
 `;
-const PriceWrapper = styled.div`
+
+const CodeWrapper = styled.div`
   width: auto;
   height: auto;
-  border: 1px solid #ccc;
-  margin: 2px;
-  padding: 5px;
-  color: #ccc;
+  padding: 0px 5px;
+  font-size: ${size("s12px")};
+  border: 1px solid ${palette("grayscale", 5)};
+
+  border-radius: 5px;
+  color: ${palette("grayscale", 0)};
   display: flex;
   justify-content: space-between;
 `;
+
 const RatingWrapper = styled.div`
   width: auto;
-  border: 1px solid #ccc;
   padding: 5px;
   margin: 2px;
   text-align: left;
   color: #ccc;
 `;
-const ButtonWrapper = styled(Button)`
-  color: #ccc;
-  position: relative;
-  padding: auto 5px;
-`;
 
-const ItemBox = ({ palette, rating, reverse, addToCartClick, ...props }) => {
+const ItemBox = ({
+  palette,
+  rating,
+  reverse,
+  transparent,
+  addToCartClick,
+  ...props
+}) => {
   return (
-    <ItemWrapper>
-      <ImageWrapper {...props} />
-      <TitleWrapper>{props.details.title}</TitleWrapper>
-      <PriceWrapper>
+    <ItemWrapper onClick={props.itemClick}>
+      <ImageWrapper
+        {...props}
+        style={{ backgroundPosition: "center center" }}
+      />
+
+      <TitleWrapper>{props.details.name}</TitleWrapper>
+      <CodeWrapper>
         <span
           style={{
             display: "flex",
@@ -68,20 +96,27 @@ const ItemBox = ({ palette, rating, reverse, addToCartClick, ...props }) => {
             justifyContent: "center"
           }}
         >
-          {props.details.currency} {props.details.price}
+          Serial No. - {props.details.serialNo}
         </span>
-        <ButtonWrapper
-          transparent
-          palette={palette ? palette : "grayscale"}
-          reverse={reverse}
-          onClick={e => {
-            addToCartClick(props.details);
+        <span
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center"
           }}
         >
-          <i className="fa fa-cart-plus" style={{ paddingRight: "10px" }} /> Add
-          to Cart
-        </ButtonWrapper>
-      </PriceWrapper>
+          |
+        </span>
+        <span
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center"
+          }}
+        >
+          Order No. - {props.details.orderNo}
+        </span>
+      </CodeWrapper>
       {rating && (
         <RatingWrapper>
           <StarRating
@@ -108,6 +143,7 @@ ItemBox.propTypes = {
     starCount: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired
   }),
+  itemClick: PropTypes.func,
   addToCartClick: PropTypes.func
 };
 export default ItemBox;
