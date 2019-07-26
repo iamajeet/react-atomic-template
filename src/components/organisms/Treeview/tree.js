@@ -12,7 +12,6 @@ const StyledUL = styled.ul`
 const LI = styled.li`
   padding: 5px 0;
   margin: 2px 0;
-  border-bottom: 2px solid ${palette("grayscale", 8)};
 `;
 class Tree extends Component {
   render() {
@@ -20,37 +19,57 @@ class Tree extends Component {
     return (
       <>
         <Link
-          serialNo={tree.serialNo}
+          itemClick={e => {
+            this.props.itemClick(e);
+          }}
+          data={tree}
+          to="#"
+          displayName={tree[this.props.displayNameKey]}
           id={id}
           img={Arrow}
-          name={tree.name}
-          level={tree.children && tree.children.length > 0 ? false : true}
+          level={
+            tree[this.props.rootNameKey] &&
+            tree[this.props.rootNameKey].length > 0
+              ? false
+              : true
+          }
         />
         <StyledUL id={`children_${id}`} className="tree-close">
-          {tree.children.map((tree, index) => {
+          {tree[this.props.rootNameKey].map((tree, index) => {
             return (
               <LI
                 key={index}
                 id={id + "_" + index}
                 className={
-                  tree.children && tree.children.length > 0
+                  tree[this.props.rootNameKey] &&
+                  tree[this.props.rootNameKey].length > 0
                     ? "link-with-icon"
                     : ""
                 }
               >
-                {tree.children && tree.children.length > 0 ? (
+                {tree[this.props.rootNameKey] &&
+                tree[this.props.rootNameKey].length > 0 ? (
                   <Tree
                     tree={tree}
                     id={id + "_" + index}
-                    onItemClick={this.props.onItemClick}
+                    rootNameKey={this.props.rootNameKey}
+                    displayNameKey={this.props.displayNameKey}
+                    itemClick={this.props.itemClick}
                   />
                 ) : (
                   <Link
+                    itemClick={e => {
+                      this.props.itemClick(e);
+                    }}
+                    data={tree}
+                    displayName={tree[this.props.displayNameKey]}
                     id={id + "_" + index}
-                    name={tree.name}
-                    serialNo={tree.serialNo}
+                    to="#"
                     level={
-                      tree.children && tree.children.length > 0 ? false : true
+                      tree[this.props.rootNameKey] &&
+                      tree[this.props.rootNameKey].length > 0
+                        ? false
+                        : true
                     }
                   />
                 )}

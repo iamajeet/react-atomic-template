@@ -697,5 +697,16 @@ const treeData = {
   ]
 };
 storiesOf("TreeView", module).addWithJSX("default", () => (
-  <TreeView treeData={treeData.children} />
+  <TreeView
+    treeData={treeData.children}
+    rootNameKey="children"
+    displayNameKey="name"
+    onSelectedNode={data => {
+      console.log("tree data last node", data);
+    }}
+    onExpandedNode={data => {
+      console.log("expand tree data", data);
+    }}
+    expandAll={true}
+  />
 ));

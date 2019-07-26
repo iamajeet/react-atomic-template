@@ -30,31 +30,45 @@ const IMG = styled.img`
   cursor: pointer;
 `;
 const Link = props => {
-  const { name, to, id, img, level, serialNo } = props;
+  const { level, to, id, img, displayName, data } = props;
   return (
     <>
       {img && (
         <IMG
           id={`icon_${id}`}
           src={img}
-          alt={name}
+          alt={displayName}
           style={{ height: "20px" }}
         />
       )}
       {level && (
         <A
+          data-tree={JSON.stringify(data)}
+          aria-label={displayName}
+          title={displayName}
           id={`link_${id}`}
-          to={to || "/page/item-details/" + serialNo}
+          to="#"
           activeClassName="tree-active"
           exact
           strict
+          onClick={props.itemClick}
         >
-          {name}
+          {displayName}
         </A>
       )}
       {!level && (
-        <A id={`link_${id}`} exact strict activeClassName="tree-active" to="#">
-          {name}
+        <A
+          data-tree={JSON.stringify(data)}
+          id={`link_${id}`}
+          title={displayName}
+          aria-label={displayName}
+          exact
+          strict
+          activeClassName="tree-active"
+          to="#"
+          onClick={props.itemClick}
+        >
+          {displayName}
         </A>
       )}
     </>
